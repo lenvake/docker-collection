@@ -1,1 +1,28 @@
+version: "3.3"
+
+services:
+  checkmk:
+    image: checkmk/${TYPE:-check-mk-free}:${VERSION:-2.1.0-latest}
+    stdin_open: true 
+    tty: true 
+    ports:
+      - target: 5000
+        published: ${PORT:-8080}
+        protocol: tcp
+        mode: host
+    tmpfs:
+      - /opt/cmk/tmp:uid=1000,gid=1000
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - data:/omd/sites
+    networks:
+      default: {}
+    restart: always
+networks:
+  default:
+    driver: ${NETWORK_MODE:-bridge}
+    attachable: true
+volumes:
+  data: {}
 
