@@ -26,3 +26,9 @@ run the downloaded file
  ```bash
 $docker load -i check-mk-free-docker-2.0.0p10.tar.gz
 ```
+
+
+and finally run the docker-compose
+ ```bash
+ $docker-compose up
+ ```
